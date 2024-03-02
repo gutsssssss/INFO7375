@@ -1,23 +1,21 @@
-import class_file as cf
-import numpy as np
+import classes as cs
 import arguments as arg
 
+
 # Define the training and testing dataset
-trainingSet = cf.Dataset(arg.img_height, arg.img_width, arg.num_classes)
-trainingSet.loadData(arg.address1)
-testingSet = cf.Dataset(arg.img_height, arg.img_width, arg.num_classes)
-testingSet.loadData(arg.address2)
+trainingSet_loader = cs.Dataset(arg.address1).loadData()
+testingSet_loader = cs.Dataset(arg.address2).loadData()
 
 # Initialize the neurons
-model = cf.Neurons(trainingSet, arg.alpha)
+model = cs.Model(trainingSet_loader)
 
 # Train the model using gradient descent
-training = cf.Training(trainingSet, model, arg.epochs)
-training.run()
+model.train()
 
 # Save model and plot loss-curve
-np.savez("model.npz", W=model.W, b=model.b)
-cf.plot_loss_curve(training)
+cs.plot_loss_curve(model)
 
 # Make predictions on the testing set
-test = cf.Test(model, testingSet)
+model.test(testingSet_loader)
+
+# test = cs.Test(model, testingSet)

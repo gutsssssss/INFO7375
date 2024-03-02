@@ -3,31 +3,32 @@ import glob
 import numpy as np
 import matplotlib
 from matplotlib import pyplot as plt
+import pickle
 
 
-class Dataset:
-    def __init__(self, img_height, img_width, num_classes):
-        # define the size and classes number
-        self.img_height = img_height
-        self.img_width = img_width
-        self.num_classes = num_classes
-        # create lists to restore img and labels
-        self.X = []  # img
-        self.y = []  # label
-
-    def loadData(self, address):
-        # get img and label
-        for folder in glob.glob(address):
-            label = folder[-1]
-            label = int(label)
-            for img_path in glob.glob(folder + '/*.png'):
-                img = plt.imread(img_path)
-                img = cv2.resize(img, (self.img_height, self.img_width))
-                self.X.append(img)
-                self.y.append(label)
-        # list to numpy
-        self.X = np.array(self.X).reshape(100, -1)
-        self.y = one_hot_encode(np.array(self.y), self.num_classes)
+# class Dataset:
+#     def __init__(self, img_height, img_width, num_classes):
+#         # define the size and classes number
+#         self.img_height = img_height
+#         self.img_width = img_width
+#         self.num_classes = num_classes
+#         # create lists to restore img and labels
+#         self.X = []  # img
+#         self.y = []  # label
+#
+#     def loadData(self, address):
+#         # get img and label
+#         for folder in glob.glob(address):
+#             label = folder[-1]
+#             label = int(label)
+#             for img_path in glob.glob(folder + '/*.png'):
+#                 img = plt.imread(img_path)
+#                 img = cv2.resize(img, (self.img_height, self.img_width))
+#                 self.X.append(img)
+#                 self.y.append(label)
+#         # list to numpy
+#         self.X = np.array(self.X).reshape(100, -1)
+#         self.y = one_hot_encode(np.array(self.y), self.num_classes)
 
 
 class Neurons:

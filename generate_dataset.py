@@ -50,7 +50,7 @@ for digit in range(10):
             break
 
 # Generate and save 3 images for each digit
-for digit in range(3):
+for digit in range(10):
     # Get the first image of the digit from the training set
     image = x_test[y_test == digit][0]
     # Reshape the image to (1, 20, 20, 1) for the data generator
